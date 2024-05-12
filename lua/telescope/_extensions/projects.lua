@@ -165,7 +165,10 @@ local function projects(opts)
       map("i", "<c-w>", change_working_directory)
 
       local on_project_selected = function()
-        find_project_files(prompt_bufnr)
+        local project_path, cd_successful = change_working_directory(prompt_bufnr, true)
+        if cd_successful then
+          vim.fn.SessionRestore()
+        end
       end
       actions.select_default:replace(on_project_selected)
       return true
