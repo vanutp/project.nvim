@@ -168,6 +168,11 @@ local function projects(opts)
         local project_path, cd_successful = change_working_directory(prompt_bufnr, true)
         if cd_successful then
           vim.api.nvim_command('SessionRestore')
+          local api = require('nvim-tree.api')
+          local view = require('nvim-tree.view')
+          if not view.is_visible() then
+            api.tree.open()
+          end
         end
       end
       actions.select_default:replace(on_project_selected)
