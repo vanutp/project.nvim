@@ -167,7 +167,7 @@ local function projects(opts)
       local on_project_selected = function()
         local project_path, cd_successful = change_working_directory(prompt_bufnr, true)
         if cd_successful then
-          require('auto-session').SessionRestore()
+          vim.api.nvim_command('SessionRestore')
         end
       end
       actions.select_default:replace(on_project_selected)
